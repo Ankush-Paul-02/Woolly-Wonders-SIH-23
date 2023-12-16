@@ -6,11 +6,13 @@ import 'package:velocity_x/velocity_x.dart';
 class CustomDrawerPlate extends StatelessWidget {
   final String title;
   final Function onTap;
+  final Color? backgroundColor;
 
   const CustomDrawerPlate({
     Key? key,
     required this.title,
     required this.onTap,
+    this.backgroundColor,
   }) : super(key: key);
 
   @override
@@ -19,7 +21,7 @@ class CustomDrawerPlate extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppTheme.blueColor,
+          backgroundColor: backgroundColor ?? AppTheme.blueColor,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(25),

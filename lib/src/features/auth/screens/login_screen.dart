@@ -37,95 +37,95 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-     final isLoading = ref.watch(authControllerProvider);
+    final isLoading = ref.watch(authControllerProvider);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(),
       backgroundColor: AppTheme.whiteColor,
       body: isLoading
           ? const Loader()
-          :  Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          'Login'.text.size(34).bold.black.make(),
-          'Please sign in to continue'
-              .text
-              .size(20)
-              .bold
-              .color(AppTheme.greyColor)
-              .make(),
-          50.heightBox,
-          AuthField(
-            label: 'Email',
-            hint: 'Enter your email',
-            icon: Icons.email,
-            controller: _emailController,
-            inputType: TextInputType.emailAddress,
-          ),
-          20.heightBox,
-          AuthField(
-            label: 'Password',
-            hint: 'Enter your password',
-            icon: Icons.lock,
-            controller: _passwordController,
-            inputType: TextInputType.visiblePassword,
-            isObscure: true,
-          ),
-          40.heightBox,
-          Align(
-            alignment: Alignment.centerRight,
-            child: SizedBox(
-              width: 30.w,
-              height: 50,
-              child: ElevatedButton.icon(
-                onPressed: () => login(context, ref),
-                icon: const Icon(
-                  Icons.arrow_forward,
-                  color: Colors.white,
-                ),
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  backgroundColor: AppTheme.blueColor,
-                ),
-                label: 'Login'
-                    .text
-                    .size(18)
-                    .bold
-                    .color(AppTheme.whiteColor)
-                    .make(),
-              ),
-            ),
-          ),
-          40.heightBox,
-          // 'Already have an account? Sign in'.text.make().centered(),
-          Text.rich(
-            TextSpan(
-              text: 'Don\'t have an account? ',
-              style: const TextStyle(
-                fontSize: 16,
-              ),
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextSpan(
-                  text: 'Sign up',
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () => Navigator.pushNamed(
-                          context,
-                          AppRoute.registerRoute,
+                'Login'.text.size(34).bold.black.make(),
+                'Please sign in to continue'
+                    .text
+                    .size(20)
+                    .bold
+                    .color(AppTheme.greyColor)
+                    .make(),
+                50.heightBox,
+                AuthField(
+                  label: 'Email',
+                  hint: 'Enter your email',
+                  icon: Icons.email,
+                  controller: _emailController,
+                  inputType: TextInputType.emailAddress,
+                ),
+                20.heightBox,
+                AuthField(
+                  label: 'Password',
+                  hint: 'Enter your password',
+                  icon: Icons.lock,
+                  controller: _passwordController,
+                  inputType: TextInputType.visiblePassword,
+                  isObscure: true,
+                ),
+                40.heightBox,
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: SizedBox(
+                    width: 30.w,
+                    height: 50,
+                    child: ElevatedButton.icon(
+                      onPressed: () => login(context, ref),
+                      icon: const Icon(
+                        Icons.arrow_forward,
+                        color: Colors.white,
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
                         ),
-                  style: TextStyle(
-                    color: AppTheme.blueColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                        backgroundColor: AppTheme.blueColor,
+                      ),
+                      label: 'Login'
+                          .text
+                          .size(18)
+                          .bold
+                          .color(AppTheme.whiteColor)
+                          .make(),
+                    ),
                   ),
                 ),
+                40.heightBox,
+                // 'Already have an account? Sign in'.text.make().centered(),
+                Text.rich(
+                  TextSpan(
+                    text: 'Don\'t have an account? ',
+                    style: const TextStyle(
+                      fontSize: 16,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: 'Sign up',
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () => Navigator.pushNamed(
+                                context,
+                                AppRoute.registerRoute,
+                              ),
+                        style: TextStyle(
+                          color: AppTheme.blueColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ).centered(),
               ],
-            ),
-          ).centered(),
-        ],
-      ).p20(),
+            ).p20(),
     );
   }
 }

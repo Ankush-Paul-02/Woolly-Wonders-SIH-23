@@ -9,6 +9,8 @@ import 'package:sih23/src/features/auth/screens/login_screen.dart';
 import 'package:sih23/src/features/auth/screens/register_screen.dart';
 import 'package:sih23/src/features/home/screens/home_screen.dart';
 import 'package:sih23/src/features/home/test/screens/test_modules.dart';
+import 'package:sih23/src/features/home/user/profile/screen/edit_profile_screen.dart';
+import 'package:sih23/src/features/home/user/profile/screen/profile_screen.dart';
 import 'package:sih23/src/features/onBoarding/screens/on_boarding_screen.dart';
 import 'package:sih23/src/model/user_model.dart';
 import 'package:sih23/src/routes/app_routes.dart';
@@ -59,20 +61,20 @@ class _MyAppState extends ConsumerState<MyApp> {
           AppRoute.registerRoute: (context) => const RegisterScreen(),
           AppRoute.loginRoute: (context) => const LoginScreen(),
           AppRoute.testRoute: (context) => const TestModule(),
-          // AppRoute.profileRoute: (context) {
-          //   final Map<String, dynamic>? arguments = ModalRoute.of(context)
-          //       ?.settings
-          //       .arguments as Map<String, dynamic>?;
-          //   final String uid = arguments?['uid'] ?? '';
-          //   return UserProfileScreen(uid: uid);
-          // },
-          // AppRoute.editProfileRoute: (context) {
-          //   final Map<String, dynamic>? arguments = ModalRoute.of(context)
-          //       ?.settings
-          //       .arguments as Map<String, dynamic>?;
-          //   final String uid = arguments?['uid'] ?? '';
-          //   return EditProfileScreen(uid: uid);
-          // },
+          AppRoute.profileRoute: (context) {
+            final Map<String, dynamic>? arguments = ModalRoute.of(context)
+                ?.settings
+                .arguments as Map<String, dynamic>?;
+            final String uid = arguments?['uid'] ?? '';
+            return ProfileScreen(uid: uid);
+          },
+          AppRoute.editProfileRoute: (context) {
+            final Map<String, dynamic>? arguments = ModalRoute.of(context)
+                ?.settings
+                .arguments as Map<String, dynamic>?;
+            final String uid = arguments?['uid'] ?? '';
+            return EditProfileScreen(uid: uid);
+          },
         },
       ),
     );

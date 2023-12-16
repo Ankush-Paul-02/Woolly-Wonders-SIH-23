@@ -21,8 +21,9 @@ class HomeDrawer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authStateChangeProvider);
+    final isLoading = ref.watch(authControllerProvider);
     return authState.when(
-      data: (data) => Column(
+      data: (data) => isLoading ? const Loader() : Column(
         children: [
           50.heightBox,
           if (data != null)
@@ -30,40 +31,39 @@ class HomeDrawer extends ConsumerWidget {
                   data: (user) => Column(
                     children: [
                       Container(
-                        height: 100,
-                        width: 100,
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: AppTheme.blueColor,
-                          borderRadius: BorderRadius.circular(50),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 5,
-                              blurRadius: 7,
-                              offset: const Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(40),
-                          child: Image.asset(
-                            AppConstants.avatarDefault,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                  height: 150,
+                  width: 150,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppTheme.blueColor,
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 3.0,
+                    ),
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        user.profilePicture,
                       ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
                       5.heightBox,
                       user.name.text.bold.size(20).make(),
                       Divider(color: AppTheme.greyColor),
                       20.heightBox,
                       CustomDrawerPlate(
                         title: 'Profile',
-                        onTap: () {},
+                        onTap: () => Navigator.pushNamed(
+                          context,
+                          AppRoute.profileRoute,
+                          arguments: {'uid': user.uid},
+                        ),
                       ),
                       10.heightBox,
                       CustomDrawerPlate(
                         title: 'Logout',
+                        backgroundColor: AppTheme.redColor,
                         onTap: () {
                           logout(ref, context);
                           Navigator.pushNamed(context, AppRoute.loginRoute);
@@ -127,7 +127,6 @@ class HomeDrawer extends ConsumerWidget {
               .size(16)
               .color(AppTheme.greyColor)
               .semiBold
-              
               .make(),
           30.heightBox,
         ],
@@ -137,8 +136,3 @@ class HomeDrawer extends ConsumerWidget {
     );
   }
 }
-
-
-
-
-

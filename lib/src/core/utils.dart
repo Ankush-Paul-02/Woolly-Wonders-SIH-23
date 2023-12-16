@@ -1,5 +1,5 @@
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 void showSnackBar(BuildContext context, String text) {
@@ -12,10 +12,9 @@ void showSnackBar(BuildContext context, String text) {
     );
 }
 
-
-Future<FilePickerResult?> pickImage() async {
-  final image = await FilePicker.platform.pickFiles(
-    type: FileType.image,
-  );
-  return image;
+Future<XFile?> pickImage() async {
+  ImagePicker imagePicker = ImagePicker();
+  XFile? file = await imagePicker.pickImage(source: ImageSource.gallery);
+  debugPrint('Image path: ${file?.path}');
+  return file;
 }

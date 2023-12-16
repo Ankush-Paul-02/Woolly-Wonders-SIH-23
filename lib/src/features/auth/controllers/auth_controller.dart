@@ -88,9 +88,9 @@ class AuthController extends StateNotifier<bool> {
   void logout(BuildContext context) async {
     state = true;
     await _authRepository.logout();
-    // Update the login status in persistent storage
     await setLoggedIn(false);
-    Navigator.pushNamed(context, AppRoute.loginRoute);
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        AppRoute.loginRoute, (Route<dynamic> route) => false);
     state = false;
   }
 
