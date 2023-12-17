@@ -6,4 +6,6 @@ class AppTheme {
   static Color blackColor = Colors.black;
   static Color greyColor = Colors.grey;
   static Color blueColor = Colors.cyan;
+  static Color greenColor = Colors.green;
+  static Color yellowColor = Colors.yellow;
 }

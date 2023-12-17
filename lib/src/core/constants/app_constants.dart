@@ -22,6 +22,9 @@ class AppConstants {
   static const home = 'assets/home.png';
   static const darkMode = 'assets/dark_mode.png';
   static const avatarDefault = 'assets/farmer.png';
+  static const quality = 'assets/quality.png';
+  static const procedure = 'assets/procedure.png';
+  static const visit = 'assets/visit.png';
 
   final onBoardingScreens = [
     const ScreenOne(),
