@@ -62,6 +62,7 @@ class AuthRepository {
             userCredential.user!.photoURL ?? AppConstants.avatarDefault,
         uid: userCredential.user!.uid,
         isVerified: false,
+        isRegistered: false,
       );
 
       _firestore

@@ -9,6 +9,7 @@ class UserModel {
   final String profilePicture;
   final String uid;
   final bool isVerified;
+  final bool isRegistered;
 
   UserModel({
     required this.name,
@@ -18,6 +19,7 @@ class UserModel {
     required this.profilePicture,
     required this.uid,
     required this.isVerified,
+    required this.isRegistered,
   });
 
   Map<String, dynamic> toMap() {
@@ -29,6 +31,7 @@ class UserModel {
       'profilePicture': profilePicture,
       'uid': uid,
       'isVerified': isVerified,
+      'isRegistered': isRegistered,
     };
   }
 
@@ -41,6 +44,7 @@ class UserModel {
       profilePicture: map['profilePicture'] as String,
       uid: map['uid'] as String,
       isVerified: map['isVerified'] as bool,
+      isRegistered: map['isRegistered'] as bool,
     );
   }
 
@@ -57,6 +61,7 @@ class UserModel {
     String? profilePicture,
     String? uid,
     bool? isVerified,
+    bool? isRegistered,
   }) {
     return UserModel(
       name: name ?? this.name,
@@ -66,6 +71,39 @@ class UserModel {
       profilePicture: profilePicture ?? this.profilePicture,
       uid: uid ?? this.uid,
       isVerified: isVerified ?? this.isVerified,
+      isRegistered: isRegistered ?? this.isRegistered,
     );
+  }
+
+  @override
+  String toString() {
+    return 'UserModel(name: $name, phoneNumber: $phoneNumber, email: $email, aadharNumber: $aadharNumber, profilePicture: $profilePicture, uid: $uid, isVerified: $isVerified, isRegistered: $isRegistered)';
+  }
+
+  @override
+  bool operator ==(covariant UserModel other) {
+    if (identical(this, other)) return true;
+  
+    return 
+      other.name == name &&
+      other.phoneNumber == phoneNumber &&
+      other.email == email &&
+      other.aadharNumber == aadharNumber &&
+      other.profilePicture == profilePicture &&
+      other.uid == uid &&
+      other.isVerified == isVerified &&
+      other.isRegistered == isRegistered;
+  }
+
+  @override
+  int get hashCode {
+    return name.hashCode ^
+      phoneNumber.hashCode ^
+      email.hashCode ^
+      aadharNumber.hashCode ^
+      profilePicture.hashCode ^
+      uid.hashCode ^
+      isVerified.hashCode ^
+      isRegistered.hashCode;
   }
 }

@@ -7,4 +7,5 @@ class AppRoute {
   static const testRoute = '/test';
   static const profileRoute = '/profile';
   static const editProfileRoute = '/editProfile';
+  static const paymentRoute = '/payment';
 }

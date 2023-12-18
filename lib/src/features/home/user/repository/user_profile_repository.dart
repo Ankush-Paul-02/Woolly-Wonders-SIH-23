@@ -65,4 +65,16 @@ class UserProfileRepository {
       ); // Return a failure on error
     }
   }
+
+  FutureEither register(String userId) async {
+    try {
+      await _users.doc(userId).update({'isRegistered': true});
+      return right('Successfully updated');
+    } catch(e) {
+      return left(
+        Failure('Failed to upload: $e'),
+      ); 
+    }
+    
+  }
 }

@@ -60,4 +60,9 @@ class UserProfileController extends StateNotifier<bool> {
       print(e.toString());
     }
   }
+
+  Future<void> register(String uid) async {
+    await _userProfileRepository.register(uid);
+    print('register');
+  }
 }
