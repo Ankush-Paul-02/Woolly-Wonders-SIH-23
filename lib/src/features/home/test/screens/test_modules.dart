@@ -21,6 +21,10 @@ class _TestModuleState extends ConsumerState<TestModule> {
     ref.read(userProfileControllerProvider.notifier).register(uid);
   }
 
+  void applyForQualityAssurance(String uid, WidgetRef ref) {
+    ref.read(userProfileControllerProvider.notifier).qualityForAssurance(uid);
+  }
+
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authStateChangeProvider);
@@ -111,42 +115,74 @@ class _TestModuleState extends ConsumerState<TestModule> {
                                                       10.heightBox,
                                                       const Spacer(),
                                                       ElevatedButton(
-                                                        onPressed: () {},
+                                                        // onPressed: () => Navigator.pushNamed(context, AppRoute.qualityRoute, arguments: {'uid': data.uid}),
+                                                        onPressed: () =>
+                                                            applyForQualityAssurance(
+                                                                data.uid, ref),
                                                         style: ElevatedButton
                                                             .styleFrom(
                                                           backgroundColor:
                                                               AppTheme
                                                                   .greenColor,
                                                         ),
-                                                        child: 'Apply'
-                                                            .text
-                                                            .white
-                                                            .bold
-                                                            .size(20)
-                                                            .make()
-                                                            .shimmer(
-                                                              gradient:
-                                                                  LinearGradient(
-                                                                colors: [
-                                                                  AppTheme
-                                                                      .whiteColor,
-                                                                  AppTheme
-                                                                      .greenColor
-                                                                      .withOpacity(
-                                                                          0.2),
-                                                                ],
-                                                              ),
-                                                              showAnimation:
-                                                                  true,
-                                                              primaryColor:
-                                                                  AppTheme
-                                                                      .whiteColor,
-                                                              secondaryColor:
-                                                                  AppTheme
+                                                        child: user
+                                                                .isAppliedForAssurance
+                                                            ? 'Applied'
+                                                                .text
+                                                                .white
+                                                                .bold
+                                                                .size(20)
+                                                                .make()
+                                                                .shimmer(
+                                                                  gradient:
+                                                                      LinearGradient(
+                                                                    colors: [
+                                                                      AppTheme
+                                                                          .whiteColor,
+                                                                      AppTheme
+                                                                          .greenColor
+                                                                          .withOpacity(
+                                                                              0.2),
+                                                                    ],
+                                                                  ),
+                                                                  showAnimation:
+                                                                      true,
+                                                                  primaryColor:
+                                                                      AppTheme
+                                                                          .whiteColor,
+                                                                  secondaryColor: AppTheme
                                                                       .greenColor
                                                                       .withOpacity(
                                                                           0.9),
-                                                            ),
+                                                                )
+                                                            : 'Apply'
+                                                                .text
+                                                                .white
+                                                                .bold
+                                                                .size(20)
+                                                                .make()
+                                                                .shimmer(
+                                                                  gradient:
+                                                                      LinearGradient(
+                                                                    colors: [
+                                                                      AppTheme
+                                                                          .whiteColor,
+                                                                      AppTheme
+                                                                          .greenColor
+                                                                          .withOpacity(
+                                                                              0.2),
+                                                                    ],
+                                                                  ),
+                                                                  showAnimation:
+                                                                      true,
+                                                                  primaryColor:
+                                                                      AppTheme
+                                                                          .whiteColor,
+                                                                  secondaryColor: AppTheme
+                                                                      .greenColor
+                                                                      .withOpacity(
+                                                                          0.9),
+                                                                ),
                                                       )
                                                           .box
                                                           .size(double.infinity,
@@ -398,7 +434,8 @@ class _TestModuleState extends ConsumerState<TestModule> {
                                             .make(),
                                         const Spacer(),
                                         ElevatedButton(
-                                          onPressed: () => register(data.uid, ref),
+                                          onPressed: () =>
+                                              register(data.uid, ref),
                                           style: ElevatedButton.styleFrom(
                                             backgroundColor:
                                                 AppTheme.greenColor,

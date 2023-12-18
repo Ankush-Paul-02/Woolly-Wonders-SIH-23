@@ -75,6 +75,16 @@ class UserProfileRepository {
         Failure('Failed to upload: $e'),
       ); 
     }
-    
+  }
+
+  FutureEither applyForQualityAssurance(String userId) async {
+    try {
+      await _users.doc(userId).update({'isAppliedForAssurance': true});
+      return right('Successfully applied');
+    } catch(e) {
+      return left(
+        Failure('Failed to applied: $e'),
+      ); 
+    }
   }
 }

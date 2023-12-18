@@ -65,4 +65,9 @@ class UserProfileController extends StateNotifier<bool> {
     await _userProfileRepository.register(uid);
     print('register');
   }
+  
+  Future<void> qualityForAssurance(String uid) async {
+    await _userProfileRepository.applyForQualityAssurance(uid);
+    print('applied');
+  }
 }

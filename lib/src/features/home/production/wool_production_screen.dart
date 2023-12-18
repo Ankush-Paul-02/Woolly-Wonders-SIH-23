@@ -58,7 +58,7 @@ class _WoolProductionScreenState extends ConsumerState<WoolProductionScreen> {
                   'Wool Productions'.text.bold.black.size(20).make(),
                   5.widthBox,
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 2),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),

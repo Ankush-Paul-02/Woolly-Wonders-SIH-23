@@ -63,6 +63,7 @@ class AuthRepository {
         uid: userCredential.user!.uid,
         isVerified: false,
         isRegistered: false,
+        isAppliedForAssurance: false,
       );
 
       _firestore

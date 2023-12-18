@@ -8,6 +8,7 @@ import 'package:sih23/src/features/auth/auth_pref.dart';
 import 'package:sih23/src/features/auth/screens/login_screen.dart';
 import 'package:sih23/src/features/auth/screens/register_screen.dart';
 import 'package:sih23/src/features/home/screens/home_screen.dart';
+import 'package:sih23/src/features/home/test/screens/quality_assurance/quality_assurance_screen.dart';
 import 'package:sih23/src/features/home/test/screens/test_modules.dart';
 import 'package:sih23/src/features/home/user/profile/screen/edit_profile_screen.dart';
 import 'package:sih23/src/features/home/user/profile/screen/profile_screen.dart';
@@ -74,6 +75,13 @@ class _MyAppState extends ConsumerState<MyApp> {
                 .arguments as Map<String, dynamic>?;
             final String uid = arguments?['uid'] ?? '';
             return EditProfileScreen(uid: uid);
+          },
+          AppRoute.qualityRoute: (context) {
+            final Map<String, dynamic>? arguments = ModalRoute.of(context)
+                ?.settings
+                .arguments as Map<String, dynamic>?;
+            final String uid = arguments?['uid'] ?? '';
+            return QualityAssuranceScreen(uid: uid);
           },
         },
       ),

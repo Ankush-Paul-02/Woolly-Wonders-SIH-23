@@ -10,6 +10,7 @@ class UserModel {
   final String uid;
   final bool isVerified;
   final bool isRegistered;
+  final bool isAppliedForAssurance;
 
   UserModel({
     required this.name,
@@ -20,6 +21,7 @@ class UserModel {
     required this.uid,
     required this.isVerified,
     required this.isRegistered,
+    required this.isAppliedForAssurance,
   });
 
   Map<String, dynamic> toMap() {
@@ -32,6 +34,7 @@ class UserModel {
       'uid': uid,
       'isVerified': isVerified,
       'isRegistered': isRegistered,
+      'isAppliedForAssurance': isAppliedForAssurance,
     };
   }
 
@@ -45,6 +48,7 @@ class UserModel {
       uid: map['uid'] as String,
       isVerified: map['isVerified'] as bool,
       isRegistered: map['isRegistered'] as bool,
+      isAppliedForAssurance: map['isAppliedForAssurance'] as bool,
     );
   }
 
@@ -62,6 +66,7 @@ class UserModel {
     String? uid,
     bool? isVerified,
     bool? isRegistered,
+    bool? isAppliedForAssurance,
   }) {
     return UserModel(
       name: name ?? this.name,
@@ -72,12 +77,13 @@ class UserModel {
       uid: uid ?? this.uid,
       isVerified: isVerified ?? this.isVerified,
       isRegistered: isRegistered ?? this.isRegistered,
+      isAppliedForAssurance: isAppliedForAssurance ?? this.isAppliedForAssurance,
     );
   }
 
   @override
   String toString() {
-    return 'UserModel(name: $name, phoneNumber: $phoneNumber, email: $email, aadharNumber: $aadharNumber, profilePicture: $profilePicture, uid: $uid, isVerified: $isVerified, isRegistered: $isRegistered)';
+    return 'UserModel(name: $name, phoneNumber: $phoneNumber, email: $email, aadharNumber: $aadharNumber, profilePicture: $profilePicture, uid: $uid, isVerified: $isVerified, isRegistered: $isRegistered, isAppliedForAssurance: $isAppliedForAssurance)';
   }
 
   @override
@@ -92,7 +98,8 @@ class UserModel {
       other.profilePicture == profilePicture &&
       other.uid == uid &&
       other.isVerified == isVerified &&
-      other.isRegistered == isRegistered;
+      other.isRegistered == isRegistered &&
+      other.isAppliedForAssurance == isAppliedForAssurance;
   }
 
   @override
@@ -104,6 +111,7 @@ class UserModel {
       profilePicture.hashCode ^
       uid.hashCode ^
       isVerified.hashCode ^
-      isRegistered.hashCode;
+      isRegistered.hashCode ^
+      isAppliedForAssurance.hashCode;
   }
 }

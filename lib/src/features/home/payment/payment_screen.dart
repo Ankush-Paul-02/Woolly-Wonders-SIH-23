@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sih23/src/features/auth/controllers/auth_controller.dart';
 
 class PaymentScreen extends ConsumerStatefulWidget {
 
@@ -16,8 +15,8 @@ class PaymentScreen extends ConsumerStatefulWidget {
 class _PaymentScreenState extends ConsumerState<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
-    final authState = ref.watch(authStateChangeProvider);
-    final isLoading = ref.watch(authControllerProvider);
+    // final authState = ref.watch(authStateChangeProvider);
+    // final isLoading = ref.watch(authControllerProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Payment Page'),
