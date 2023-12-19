@@ -9,6 +9,7 @@ import 'package:sizer/sizer.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../core/common/loader.dart';
+import '../../../core/utils.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -33,6 +34,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           password: _passwordController.text.trim(),
           context: context,
         );
+  }
+
+  bool isValidate() {
+    if (_emailController.text.trim().isEmpty ||
+        _passwordController.text.trim().isEmpty) {
+      showSnackBar(context, 'Please enter all fields!');
+      return false;
+    }
+    return true;
   }
 
   @override
@@ -79,7 +89,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     width: 30.w,
                     height: 50,
                     child: ElevatedButton.icon(
-                      onPressed: () => login(context, ref),
+                      onPressed: () {
+                        if (isValidate()) {
+                          login(context, ref);
+                        }
+                      },
                       icon: const Icon(
                         Icons.arrow_forward,
                         color: Colors.white,

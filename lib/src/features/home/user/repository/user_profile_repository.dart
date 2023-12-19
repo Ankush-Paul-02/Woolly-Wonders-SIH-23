@@ -70,10 +70,10 @@ class UserProfileRepository {
     try {
       await _users.doc(userId).update({'isRegistered': true});
       return right('Successfully updated');
-    } catch(e) {
+    } catch (e) {
       return left(
         Failure('Failed to upload: $e'),
-      ); 
+      );
     }
   }
 
@@ -81,10 +81,10 @@ class UserProfileRepository {
     try {
       await _users.doc(userId).update({'isAppliedForAssurance': true});
       return right('Successfully applied');
-    } catch(e) {
+    } catch (e) {
       return left(
         Failure('Failed to applied: $e'),
-      ); 
+      );
     }
   }
 }

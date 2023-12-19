@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sih23/src/core/common/loader.dart';
 import 'package:sih23/src/core/constants/app_constants.dart';
 import 'package:sih23/src/features/auth/controllers/auth_controller.dart';
@@ -23,6 +25,32 @@ class _TestModuleState extends ConsumerState<TestModule> {
 
   void applyForQualityAssurance(String uid, WidgetRef ref) {
     ref.read(userProfileControllerProvider.notifier).qualityForAssurance(uid);
+  }
+
+  late SharedPreferences prefs;
+  late int endTimeMillis;
+
+  @override
+  void initState() {
+    super.initState();
+    initSharedPreferences();
+  }
+
+  void initSharedPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    // Retrieve the stored end time, or set a default value (e.g., -1) if not stored
+    endTimeMillis = prefs.getInt('endTimeMillis') ?? -1;
+  }
+
+  void startCountdown() {
+    // Calculate the end time (e.g., 1 hour from now)
+    endTimeMillis = DateTime.now().millisecondsSinceEpoch + 60 * 60 * 1000;
+
+    // Store the end time
+    prefs.setInt('endTimeMillis', endTimeMillis);
+
+    // Force a rebuild to start the countdown
+    setState(() {});
   }
 
   @override
@@ -359,43 +387,69 @@ class _TestModuleState extends ConsumerState<TestModule> {
                                                           .make(),
                                                       10.heightBox,
                                                       const Spacer(),
-                                                      ElevatedButton(
-                                                        onPressed: () {},
-                                                        style: ElevatedButton
-                                                            .styleFrom(
-                                                          backgroundColor:
-                                                              AppTheme
-                                                                  .greenColor,
+                                                      Container(
+                                                        height: 60,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(20),
+                                                          color: AppTheme
+                                                              .greenColor,
                                                         ),
-                                                        child: 'Apply'
-                                                            .text
-                                                            .white
-                                                            .bold
-                                                            .size(18)
-                                                            .make()
-                                                            .shimmer(
-                                                              gradient:
-                                                                  LinearGradient(
-                                                                colors: [
-                                                                  AppTheme
-                                                                      .whiteColor,
-                                                                  AppTheme
-                                                                      .greenColor
-                                                                      .withOpacity(
-                                                                          0.2),
-                                                                ],
-                                                              ),
-                                                              showAnimation:
-                                                                  true,
-                                                              primaryColor:
-                                                                  AppTheme
-                                                                      .whiteColor,
-                                                              secondaryColor:
-                                                                  AppTheme
-                                                                      .greenColor
-                                                                      .withOpacity(
-                                                                          0.9),
-                                                            ),
+                                                        child:
+                                                            user.isAppliedForAssurance ==
+                                                                    true
+                                                                ? CountdownTimer(
+                                                                    endTime: DateTime.now()
+                                                                            .millisecondsSinceEpoch +
+                                                                        60 *
+                                                                            60 *
+                                                                            1000, // 2 minutes
+                                                                    textStyle:
+                                                                        const TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          18,
+                                                                    ),
+                                                                    endWidget: 'Visiting team will arrived soon'
+                                                                        .text
+                                                                        .white
+                                                                        .make()
+                                                                        .centered(),
+                                                                  ).centered()
+                                                                : 'Coming soon'
+                                                                    .text
+                                                                    .white
+                                                                    .bold
+                                                                    .size(18)
+                                                                    .make()
+                                                                    .shimmer(
+                                                                      gradient:
+                                                                          LinearGradient(
+                                                                        colors: [
+                                                                          AppTheme
+                                                                              .whiteColor,
+                                                                          AppTheme
+                                                                              .greenColor
+                                                                              .withOpacity(0.2),
+                                                                        ],
+                                                                      ),
+                                                                      showAnimation:
+                                                                          true,
+                                                                      primaryColor:
+                                                                          AppTheme
+                                                                              .whiteColor,
+                                                                      secondaryColor: AppTheme
+                                                                          .greenColor
+                                                                          .withOpacity(
+                                                                              0.9),
+                                                                    )
+                                                                    .centered(),
                                                       )
                                                           .box
                                                           .size(double.infinity,

@@ -23,10 +23,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       key: scaffoldKey,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppTheme.whiteColor,
         title: 'Woolly Wonders'.text.size(20).bold.black.make(),
         iconTheme: const IconThemeData(color: Colors.black),
-        elevation: 0,
+        elevation: 1,
         leading: IconButton(
           onPressed: () => scaffoldKey.currentState?.openDrawer(),
           icon: Image(

@@ -19,6 +19,8 @@ dependencies:
   firebase_storage: ^11.5.5
   flutter:
     sdk: flutter
+  flutter_countdown_timer: ^4.1.0
+  flutter_localization: ^0.2.0
   flutter_riverpod: ^2.4.9
   fpdart: ^1.1.0
   google_fonts: ^6.1.0

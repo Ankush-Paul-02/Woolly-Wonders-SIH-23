@@ -35,7 +35,7 @@ class AuthRepository {
 
   bool _isLoggedIn = false;
 
-  bool get isLoggedIn => _isLoggedIn;    
+  bool get isLoggedIn => _isLoggedIn;
 
   FutureEither<UserModel> registerWithEmail({
     required String username,
@@ -70,7 +70,7 @@ class AuthRepository {
           .collection(FirebaseConstants.usersCollection)
           .doc(userCredential.user!.uid)
           .set(newUserModel.toMap());
-      _isLoggedIn = true;    
+      _isLoggedIn = true;
       return right(newUserModel);
     } on FirebaseException catch (e) {
       throw e.message!;
