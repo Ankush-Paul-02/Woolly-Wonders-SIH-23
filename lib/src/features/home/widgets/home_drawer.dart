@@ -73,17 +73,18 @@ class HomeDrawer extends ConsumerWidget {
                               },
                             ),
                             20.heightBox,
-                            CustomDrawerPlate(
-                              title: 'Create',
-                              backgroundColor: AppTheme.greenColor,
-                              onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  AppRoute.lastRoute,
-                                  arguments: {'uid': user.uid},
-                                );
-                              },
-                            ),
+                            if (user.userType == 'Farmer')
+                              CustomDrawerPlate(
+                                title: 'Create',
+                                backgroundColor: AppTheme.greenColor,
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    AppRoute.lastRoute,
+                                    arguments: {'uid': user.uid},
+                                  );
+                                },
+                              ),
                           ],
                         ),
                         loading: () => const Loader(),

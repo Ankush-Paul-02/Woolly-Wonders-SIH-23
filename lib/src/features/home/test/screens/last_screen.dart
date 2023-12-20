@@ -42,6 +42,8 @@ class _LastScreenState extends ConsumerState<LastScreen> {
     final user = ref.watch(getUserDataProvider(widget.uid));
     final authRepo = ref.read(authRepositoryProvider);
 
+     String selectedWool = 'Deccani';
+
     return Scaffold(
       body: user.when(
         data: (data) => SingleChildScrollView(
@@ -61,6 +63,33 @@ class _LastScreenState extends ConsumerState<LastScreen> {
               ),
               10.heightBox,
               10.heightBox,
+              DropdownButton<String>(
+                value: selectedWool,
+                items: const [
+                  DropdownMenuItem(
+                    value: 'Deccani',
+                    child: Text('Deccani - Rs 450/kg'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Bellary',
+                    child: Text('Bellary - Rs 180/kg'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Mandya',
+                    child: Text('Mandya - Rs 2000-3000/kg'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Chokla Ram',
+                    child: Text('Chokla Ram - Rs 380-500/kg'),
+                  ),
+                ],
+                onChanged: (value) {
+                  setState(() {
+                    selectedWool = value!;
+                  });
+                },
+              ),
+              10.heightBox,
               30.heightBox,
               30.heightBox,
               Align(
@@ -73,12 +102,14 @@ class _LastScreenState extends ConsumerState<LastScreen> {
                       if (isValidate()) {
                         // Call the createAndSaveWool method
                         await authRepo.createAndSaveWool(
-                          woolId:
-                              const Uuid().v1().toString(), // Replace with your logic for generating woolId
+                          woolId: const Uuid()
+                              .v1()
+                              .toString(), // Replace with your logic for generating woolId
                           color: _colorController.text,
-                          isRejected: false, // Replace with your logic for setting the price
+                          isRejected:
+                              false, // Replace with your logic for setting the price
                         );
-
+                        Navigator.of(context).pop();
                         // You can navigate to the next screen or perform other actions
                       }
                     },

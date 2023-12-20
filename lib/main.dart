@@ -98,7 +98,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     if (widget.loggedIn) {
       return const OnBoardingScreen();
     } else {
-      return const OnBoardingScreen();
+      return const LoginScreen();
     }
   }
 }

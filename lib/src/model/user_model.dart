@@ -64,6 +64,7 @@ class UserModel {
     String? userType,
     String? profilePicture,
     String? uid,
+    String? uniqueString,
     bool? isVerified,
     bool? isRegistered,
     bool? isAppliedForAssurance,

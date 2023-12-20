@@ -16,10 +16,13 @@ class WoolList extends ConsumerWidget {
 
     return woolData.when(
       data: (wools) {
-        return Column(
-          children: [
-            for (final wool in wools) WoolCard(wool: wool),
-          ],
+        return SingleChildScrollView
+        (
+          child: Column(
+            children: [
+              for (final wool in wools) WoolCard(wool: wool),
+            ],
+          ),
         );
       },
       error: (error, printStackTrace) => ErrorText(error: error.toString()),
