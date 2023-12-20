@@ -85,7 +85,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             20.heightBox,
             const Divider(),
             10.heightBox,
-            'Aadhar ${userData.aadharNumber}'
+            'Aadhar ${userData.userType}'
                 .text
                 .color(AppTheme.greyColor)
                 .size(18)

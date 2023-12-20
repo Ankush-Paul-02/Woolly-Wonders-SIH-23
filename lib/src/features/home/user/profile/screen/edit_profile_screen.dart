@@ -16,7 +16,9 @@ class EditProfileScreen extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _ProfileScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _ProfileScreenState(
+    
+  );
 }
 
 class _ProfileScreenState extends ConsumerState<EditProfileScreen> {
@@ -72,7 +74,7 @@ class _ProfileScreenState extends ConsumerState<EditProfileScreen> {
             20.heightBox,
             const Divider(),
             10.heightBox,
-            'Aadhar ${userData.aadharNumber}'
+            'Aadhar ${userData.userType}'
                 .text
                 .color(AppTheme.greyColor)
                 .size(18)

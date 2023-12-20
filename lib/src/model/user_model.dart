@@ -5,7 +5,7 @@ class UserModel {
   final String name;
   final String phoneNumber;
   final String email;
-  final String aadharNumber;
+  final String userType;
   final String profilePicture;
   final String uid;
   final bool isVerified;
@@ -16,7 +16,7 @@ class UserModel {
     required this.name,
     required this.phoneNumber,
     required this.email,
-    required this.aadharNumber,
+    required this.userType,
     required this.profilePicture,
     required this.uid,
     required this.isVerified,
@@ -29,7 +29,7 @@ class UserModel {
       'name': name,
       'phoneNumber': phoneNumber,
       'email': email,
-      'aadharNumber': aadharNumber,
+      'userType': userType,
       'profilePicture': profilePicture,
       'uid': uid,
       'isVerified': isVerified,
@@ -43,7 +43,7 @@ class UserModel {
       name: map['name'] as String,
       phoneNumber: map['phoneNumber'] as String,
       email: map['email'] as String,
-      aadharNumber: map['aadharNumber'] as String,
+      userType: map['userType'] as String,
       profilePicture: map['profilePicture'] as String,
       uid: map['uid'] as String,
       isVerified: map['isVerified'] as bool,
@@ -61,7 +61,7 @@ class UserModel {
     String? name,
     String? phoneNumber,
     String? email,
-    String? aadharNumber,
+    String? userType,
     String? profilePicture,
     String? uid,
     bool? isVerified,
@@ -72,7 +72,7 @@ class UserModel {
       name: name ?? this.name,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       email: email ?? this.email,
-      aadharNumber: aadharNumber ?? this.aadharNumber,
+      userType: userType ?? this.userType,
       profilePicture: profilePicture ?? this.profilePicture,
       uid: uid ?? this.uid,
       isVerified: isVerified ?? this.isVerified,
@@ -83,7 +83,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(name: $name, phoneNumber: $phoneNumber, email: $email, aadharNumber: $aadharNumber, profilePicture: $profilePicture, uid: $uid, isVerified: $isVerified, isRegistered: $isRegistered, isAppliedForAssurance: $isAppliedForAssurance)';
+    return 'UserModel(name: $name, phoneNumber: $phoneNumber, email: $email, userType: $userType, profilePicture: $profilePicture, uid: $uid, isVerified: $isVerified, isRegistered: $isRegistered, isAppliedForAssurance: $isAppliedForAssurance)';
   }
 
   @override
@@ -94,7 +94,7 @@ class UserModel {
       other.name == name &&
       other.phoneNumber == phoneNumber &&
       other.email == email &&
-      other.aadharNumber == aadharNumber &&
+      other.userType == userType &&
       other.profilePicture == profilePicture &&
       other.uid == uid &&
       other.isVerified == isVerified &&
@@ -107,7 +107,7 @@ class UserModel {
     return name.hashCode ^
       phoneNumber.hashCode ^
       email.hashCode ^
-      aadharNumber.hashCode ^
+      userType.hashCode ^
       profilePicture.hashCode ^
       uid.hashCode ^
       isVerified.hashCode ^

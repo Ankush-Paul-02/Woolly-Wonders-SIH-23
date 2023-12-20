@@ -9,4 +9,5 @@ class AppRoute {
   static const editProfileRoute = '/editProfile';
   static const paymentRoute = '/payment';
   static const qualityRoute = '/quality';
+  static const lastRoute = '/last';
 }

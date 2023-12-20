@@ -8,6 +8,7 @@ import 'package:sih23/src/core/failure.dart';
 import 'package:sih23/src/core/provider/firebase_provider.dart';
 import 'package:sih23/src/core/typedef.dart';
 import 'package:sih23/src/model/user_model.dart';
+import 'package:sih23/src/model/wool_model.dart';
 
 final authRepositoryProvider = Provider(
   (ref) => AuthRepository(
@@ -17,6 +18,12 @@ final authRepositoryProvider = Provider(
 );
 
 final verificationIdProvider = StateProvider<String?>((ref) => null);
+
+final getWoolsDataProvider = StreamProvider<List<WoolModel>>((ref) {
+  final authRepo = ref.read(authRepositoryProvider);
+
+  return authRepo.getAllWoolsData();
+});
 
 class AuthRepository {
   final FirebaseFirestore _firestore;
@@ -42,7 +49,7 @@ class AuthRepository {
     required String email,
     required String password,
     required String phone,
-    required String aadhar,
+    required String userType,
   }) async {
     try {
       UserCredential userCredential;
@@ -57,7 +64,7 @@ class AuthRepository {
         name: userCredential.user!.displayName ?? username,
         phoneNumber: userCredential.user!.phoneNumber ?? phone,
         email: userCredential.user!.email ?? email,
-        aadharNumber: aadhar,
+        userType: userType,
         profilePicture:
             userCredential.user!.photoURL ?? AppConstants.avatarDefault,
         uid: userCredential.user!.uid,
@@ -109,5 +116,48 @@ class AuthRepository {
             event.data() as Map<String, dynamic>,
           ),
         );
+  }
+
+  CollectionReference get _wools =>
+      _firestore.collection(FirebaseConstants.woolCollection);
+
+  Stream<List<WoolModel>> getAllWoolsData() {
+    return _wools.snapshots().map(
+          (snapshot) => snapshot.docs
+              .map((doc) =>
+                  WoolModel.fromMap(doc.data() as Map<String, dynamic>))
+              .toList(),
+        );
+  }
+
+  FutureEither<void> createAndSaveWool({
+    required String woolId,
+    required String color,
+    required bool isRejected,
+  }) async {
+    try {
+      WoolModel wool =
+          WoolModel(id: woolId, color: color, isRejected: isRejected);
+      await _wools.doc(woolId).set(wool.toMap());
+      return right(unit);
+    } on FirebaseException catch (e) {
+      print("Firebase Exception: ${e.message}");
+      return left(Failure(e.message!));
+    } catch (e) {
+      print("Error: $e");
+      return left(Failure(e.toString()));
+    }
+  }
+
+  Future<void> updateWoolStatus(String woolId, bool isRejected) async {
+    try {
+      await _wools.doc(woolId).update({'isRejected': isRejected});
+    } on FirebaseException catch (e) {
+      print("Firebase Exception: ${e.message}");
+      throw Failure(e.message!);
+    } catch (e) {
+      print("Error: $e");
+      throw Failure(e.toString());
+    }
   }
 }

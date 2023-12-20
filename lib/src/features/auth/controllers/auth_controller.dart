@@ -46,7 +46,7 @@ class AuthController extends StateNotifier<bool> {
     required String email,
     required String password,
     required String phone,
-    required String aadhar,
+    required String userType,
     required BuildContext context,
   }) async {
     state = true;
@@ -55,7 +55,7 @@ class AuthController extends StateNotifier<bool> {
       email: email,
       password: password,
       phone: phone,
-      aadhar: aadhar,
+      userType: userType,
     );
     state = false;
     user.fold(
@@ -97,6 +97,4 @@ class AuthController extends StateNotifier<bool> {
   Stream<UserModel> getUserData(String uid) {
     return _authRepository.getUserData(uid);
   }
-
-
 }

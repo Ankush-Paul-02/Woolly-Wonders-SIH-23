@@ -12,6 +12,7 @@ import 'package:sih23/src/core/provider/firebase_provider.dart';
 import 'package:sih23/src/core/typedef.dart';
 
 import '../../../../core/constants/firebase_constants.dart';
+import '../../../../model/wool_model.dart';
 
 final userProfileRepositoryProvider = Provider(
   (ref) => UserProfileRepository(
@@ -85,6 +86,35 @@ class UserProfileRepository {
       return left(
         Failure('Failed to applied: $e'),
       );
+    }
+  }
+
+  Future<Either<Failure, String>> addWoolProduct(
+      String uid, WoolModel woolProduct) async {
+    try {
+      final Map<String, dynamic> woolData = woolProduct.toMap();
+
+      // Use add method to create a new document with a unique ID
+      await _firestore.collection('woolProducts').add(woolData);
+
+      return right('Wool product added successfully');
+    } catch (e) {
+      return left(Failure("Failed to add wool product: $e"));
+    }
+  }
+
+  FutureEither<List<WoolModel>> getAllWoolProducts() async {
+    try {
+      final QuerySnapshot woolProductsSnapshot =
+          await _firestore.collection('woolProducts').get();
+
+      final List<WoolModel> woolProducts = woolProductsSnapshot.docs
+          .map((doc) => WoolModel.fromMap(doc.data() as Map<String, dynamic>))
+          .toList();
+
+      return right(woolProducts);
+    } catch (e) {
+      return left(Failure('Failed to get all wool products: $e'));
     }
   }
 }

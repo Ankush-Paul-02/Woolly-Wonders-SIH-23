@@ -116,7 +116,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
             NavigationDestination(
               icon: Image(
-                image: const AssetImage(AppConstants.test),
+                image: const AssetImage(AppConstants.add),
                 color:
                     _currentTab == 3 ? AppTheme.blueColor : AppTheme.blackColor,
                 fit: BoxFit.cover,

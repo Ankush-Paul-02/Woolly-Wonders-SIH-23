@@ -19,7 +19,6 @@ class RegisterScreen extends ConsumerStatefulWidget {
 
 class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final _nameController = TextEditingController();
-  final _aadharController = TextEditingController();
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -29,27 +28,25 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   void dispose() {
     super.dispose();
     _nameController.dispose();
-    _aadharController.dispose();
     _phoneController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
   }
 
-  void registerWithEmail(WidgetRef ref, BuildContext context) {
+  void registerWithEmail(WidgetRef ref, BuildContext context, String userType) {
     ref.read(authControllerProvider.notifier).registerWithEmail(
-          username: _nameController.text.trim(),
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim(),
-          phone: _phoneController.text.trim(),
-          aadhar: _aadharController.text.trim(),
-          context: context,
-        );
+      username: _nameController.text.trim(),
+      email: _emailController.text.trim(),
+      password: _passwordController.text.trim(),
+      phone: _phoneController.text.trim(),
+      userType: userType, 
+      context: context,
+    );
   }
 
   bool isValidate() {
     if (_nameController.text.trim().isEmpty ||
-        _aadharController.text.trim().isEmpty ||
         _phoneController.text.trim().isEmpty ||
         _emailController.text.trim().isEmpty ||
         _passwordController.text.trim().isEmpty ||
@@ -63,6 +60,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     }
     return true;
   }
+
+  String _selectedUserType = 'Farmer'; 
+
+  final List<String> userTypes = ['Farmer', 'Shader', 'Spinner', 'EndUser'];
 
   @override
   Widget build(BuildContext context) {
@@ -87,12 +88,19 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     inputType: TextInputType.name,
                   ),
                   20.heightBox,
-                  AuthField(
-                    label: 'Aadhar',
-                    hint: 'Enter your aadhar number',
-                    icon: Icons.numbers_outlined,
-                    controller: _aadharController,
-                    inputType: TextInputType.number,
+                  DropdownButton<String>(
+                    value: _selectedUserType,
+                    onChanged: (String? value) {
+                      setState(() {
+                        _selectedUserType = value!;
+                      });
+                    },
+                    items: userTypes.map((String userType) {
+                      return DropdownMenuItem<String>(
+                        value: userType,
+                        child: Text(userType),
+                      );
+                    }).toList(),
                   ),
                   20.heightBox,
                   AuthField(
@@ -137,7 +145,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       child: ElevatedButton.icon(
                         onPressed: () {
                           if (isValidate()) {
-                            registerWithEmail(ref, context);
+                            registerWithEmail(ref, context, _selectedUserType);
                           }
                         },
                         icon: const Icon(

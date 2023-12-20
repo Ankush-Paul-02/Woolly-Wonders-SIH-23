@@ -1,6 +1,6 @@
 import 'package:sih23/src/features/home/price/price_screen.dart';
 import 'package:sih23/src/features/home/production/wool_production_screen.dart';
-import 'package:sih23/src/features/home/test/screens/test_screen.dart';
+import 'package:sih23/src/features/home/test/screens/fourth_screen.dart';
 import 'package:sih23/src/features/home/trends/trend_screen.dart';
 import 'package:sih23/src/features/onBoarding/screens/screen_three.dart';
 import 'package:sih23/src/features/onBoarding/screens/screen_two.dart';
@@ -25,6 +25,7 @@ class AppConstants {
   static const quality = 'assets/quality.png';
   static const procedure = 'assets/procedure.png';
   static const visit = 'assets/visit.png';
+  static const add = 'assets/plus.png';
 
   final onBoardingScreens = [
     const ScreenOne(),
@@ -36,7 +37,7 @@ class AppConstants {
     const WoolProductionScreen(),
     const TrendScreen(),
     const PriceScreen(),
-    const TestScreen(),
+    const WoolList(),
   ];
 
   static const newsApiKey = 'b513bc8a5ddf4f97977ea2225f3ffb08';
